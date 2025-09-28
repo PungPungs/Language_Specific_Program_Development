@@ -11,8 +11,8 @@ CSV 파일로 자동 저장 → 사후 분석, 정리 용이
 
 간단한 UI 제공으로 누구나 쉽게 사용
 
-[](img/ui.png)
-[](img/test.gif)
+[ui](img/ui.png)
+[test](img/test.gif)
 
 Rust + egui 기반의 직관적인 UI.
 사용자는 간단한 입력창과 버튼만으로 데이터를 기록할 수 있습니다.
@@ -22,5 +22,5 @@ Rust + egui 기반의 직관적인 UI.
 지정된 라인 간격에 따라 종료시 textedit로 값이 전달되고 작성된 기록은 즉시 CSV 파일로 저장됩니다.
 
 결과물 (CSV 캡처)
-[](img/csv.png)
+[csv](img/csv.png)
 데이터는 날짜별 CSV로 저장되며,
