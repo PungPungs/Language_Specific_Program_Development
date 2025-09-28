@@ -2,9 +2,9 @@
 
 - 목적 : 현장 탐사시 종이로 작성할 때 너무 번거로운 부분이 있어 만들게 되었다.
 
-![test](.\1. Survey Report\rust\test.gif)
-![ui](.\1. Survey Report\rust\ui.png)
-![csv](.\1. Survey Report\rust\csv.png)
+![test](main/1.%20Survey%20Report/rust/img/test.gif)
+![ui](main/1.%20Survey%20Report/rust/img/ui.png)
+![csv](main/1.%20Survey%20Report/rust/img/csv.png)
 #### 프로젝트 제작 중 러스트 몰랐던 점.
 ##### 1. ::, . 차이
 - :: > Path Separator(경로 구분자)
