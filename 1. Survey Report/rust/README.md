@@ -1,10 +1,12 @@
 ## rust로 제작하는 기록 프로그램
 
 - 목적 : 현장 탐사시 종이로 작성할 때 너무 번거로운 부분이 있어 만들게 되었다.
-
-![test](/img/test.gif)
+---
+![test](img/test.gif)
+---
 ![ui](img/ui.png)
-![csv](/img/csv.png)
+---
+![csv](img/csv.png)
 
 #### 프로젝트 제작 중 러스트 몰랐던 점.
 ##### 1. ::, . 차이
