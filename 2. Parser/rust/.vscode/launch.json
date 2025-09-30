@@ -1,0 +1,6 @@
+{
+  "skipFiles": [
+    "<rustlib>/**",
+    "${workspaceFolder}/.cargo/**"
+  ]
+}
