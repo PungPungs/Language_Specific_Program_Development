@@ -5,7 +5,7 @@ use std::io::Write;
 fn main() -> std::io::Result<()> {
     let base_path = "./Logs";
     let re = Regex::new(r"^RawMag").unwrap();
-    let check = Regex::new(r"^\*").unwrap();
+    let check = Regex::new(r"^\*.*Q:[0-9]{2}").unwrap();
     let entries = fs::read_dir(base_path)?;
 
     for entry in entries {
@@ -19,8 +19,9 @@ fn main() -> std::io::Result<()> {
 
             for line in reader.lines() {
                 let line = line?;
-                if check.is_match(&line) {
-                    new_contents.push_str(&line);
+                if let Some(caps) = check.captures(&line) {
+                    let cap: &str = &caps[0];
+                    new_contents.push_str(&cap);
                     new_contents.push('\n');
                 }
             }
