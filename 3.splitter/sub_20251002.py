@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog,QMessageBox
 import numpy as np
 import sys
-from ui import Ui_MainWindow
+from ui2 import Ui_MainWindow
 from obspy import read
 
 
@@ -13,17 +13,13 @@ class Splitter(Ui_MainWindow, QMainWindow):
         self.pb_convert.clicked.connect(self.convert)
         self.show()
 
-
-    def open_file(self):
+    def convert(self):
         file_path, _ = QFileDialog.getOpenFileNames(None, "파일 선택", "","segy (*.sgy)")
         temp = []
-        self.segy = read(file_path[0])
-        
-
-    def convert(self):
+        segy = read(file_path[0])
 
 
-        self.interval = self.segy.stats.binary_file_header["sample_interval_in_microseconds"] / 100
+        self.interval = segy.stats.binary_file_header["sample_interval_in_microseconds"] / 100
         if self.interval == 0:
             QMessageBox.information(self,"경고","interval의 값이 0 입니다.")
             return
@@ -36,8 +32,10 @@ class Splitter(Ui_MainWindow, QMainWindow):
 
 
         trace_data = np.array(segy.traces)
+        if self.cb_amp.isChecked():
+            trace_data = (trace_data**2) / abs(trace_data)
         num_of_trace = trace_data.shape[1]
-        
+
         start_idx, end_idx = int(float(self.le_time_min.text())/self.interval) * 10, int(float(self.le_time_max.text())/self.interval) *10
 
 
@@ -45,9 +43,9 @@ class Splitter(Ui_MainWindow, QMainWindow):
             temp.append([trace.meta.segy.trace_header.get('unpacked_header')[72:76], trace.meta.segy.trace_header.get('unpacked_header')[76:80]])
 
         if self.rb_psbp.isChecked():
-            _gps = (np.frombuffer(np.array(temp),dtype=">i4")).reshape([-1,2]) / 100
+            _gps = (np.frombuffer(np.array(temp),dtype="<i4")).reshape([-1,2]) / 10
         elif self.rb_4ch.isChecked():
-            _gps = (np.frombuffer(np.array(temp),dtype=">i4")).reshape([-1,2]) / 10
+            _gps = (np.frombuffer(np.array(temp),dtype="<i4")).reshape([-1,2]) / 10
         else:
             QMessageBox.information(self,"경고","파일 타입을 선택해주세요")
         temp.clear()

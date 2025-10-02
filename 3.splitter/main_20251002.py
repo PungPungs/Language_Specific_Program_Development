@@ -41,9 +41,9 @@ class Splitter(Ui_MainWindow, QMainWindow):
             temp.append([trace.meta.segy.trace_header.get('unpacked_header')[72:76], trace.meta.segy.trace_header.get('unpacked_header')[76:80]])
 
         if self.rb_psbp.isChecked():
-            _gps = (np.frombuffer(np.array(temp),dtype=">i4")).reshape([-1,2]) / 100
+            _gps = (np.frombuffer(np.array(temp),dtype="<i4")).reshape([-1,2]) / 100
         elif self.rb_4ch.isChecked():
-            _gps = (np.frombuffer(np.array(temp),dtype=">i4")).reshape([-1,2]) / 10
+            _gps = (np.frombuffer(np.array(temp),dtype="<i4")).reshape([-1,2]) / 10
         else:
             QMessageBox.information(self,"경고","파일 타입을 선택해주세요")
         temp.clear()
